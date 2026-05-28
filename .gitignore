@@ -1,0 +1,15 @@
+.venv/
+citylearn-env/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.env
+dist/
+build/
+outputs/
+results/
+logs/
+*.csv
+*.parquet
+*.h5

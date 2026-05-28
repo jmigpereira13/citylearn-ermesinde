@@ -1,0 +1,16 @@
+from citylearn.agents.marlisa import MARLISA as Agent
+from citylearn.citylearn import CityLearnEnv
+from IPython.display import display
+
+# initialize
+env = CityLearnEnv('citylearn_challenge_2023_phase_2_local_evaluation', central_agent=False)
+model = Agent(env)
+
+# train
+model.learn(episodes=2, deterministic_finish=True)
+
+# test
+kpis = model.env.evaluate()
+kpis = kpis.pivot(index='cost_function', columns='name', values='value').round(3)
+kpis = kpis.dropna(how='all')
+display(kpis)
