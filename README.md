@@ -14,31 +14,18 @@ Este repositório reúne:
 
 ```text
 CityLearn/
-├── .venv/                  # ambiente virtual local (não versionado)
-├── tests/                  # scripts de teste e experimentação
-│   ├── baseline.py
-│   ├── central_rbc.py
-│   ├── check_all_params.py
-│   ├── inspect_params.py
-│   ├── decentral_marlisa.py
-│   ├── decentral_sac.py
-│   ├── multiagent_rllib.py
-│   ├── singleagent_rllib.py
-│   └── stable_baseline_rla.py
+├── .citylearn-env/         # ambiente virtual local (não versionado)
+├── tests/                  # scripts de teste e experiências
+│   ├── baseline.py     # No control agent
+│   ├── central_rbc.py # Centralized Rule Based Control
+│   ├── check_all_params.py # Tentativa comparação datasets
+│   ├── inspect_params.py # Tentativa leitura datasets
+│   ├── decentral_marlisa.py # Decentralized MARLISA (Multi-Agent Reinforcement Learning with Iterative Sequential Action)
+│   ├── decentral_sac.py # Decentralized Soft-Actor Critic
+│   ├── multiagent_rllib.py # Multiagent Reinforcement Learning Lib
+│   ├── singleagent_rllib.py # Singleagent Reinforcement Learning Lib
+│   └── stable_baseline_rla.py # Static Baseline Reinforcement Learning Agent
 └── README.md
-```
-
-## Ambiente
-
-### Criar ambiente virtual
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
-
-### Desativar ambiente virtual
-```powershell
-deactivate
 ```
 
 ## Instalação
@@ -53,24 +40,15 @@ Se necessário, instalar dependências adicionais usadas nos testes:
 pip install -r requirements.txt
 ```
 
-## Utilização
-
-Exemplos:
-```powershell
-python .\tests\check_all_params.py
-python .\tests\inspect_params.py
-python .\tests\baseline.py
-```
-
 ## Notas
 
 - Este repositório é o workspace local de desenvolvimento e experimentação.
 - A interface gráfica/visualização está num projeto separado: `citylearn_UI/citylearn-ui`.
 - O motor oficial do CityLearn encontra-se no repositório upstream do projeto CityLearn.
 
-## Próximos passos
+<!-- ## Próximos passos
 
 - organizar dependências em `requirements.txt`;
 - separar testes exploratórios de scripts finais;
 - adicionar datasets e schemas próprios do caso Ermesinde;
-- documentar pipeline completo de simulação.
+- documentar pipeline completo de simulação. -->
