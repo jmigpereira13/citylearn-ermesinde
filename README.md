@@ -249,11 +249,11 @@ schema.json
 
 ---
 
-## Próximos Passos
+<!-- ## Próximos Passos
 
 - [ ] Organizar dependências em `requirements.txt`
 - [ ] Separar testes exploratórios de scripts finais/aplicados
 - [ ] Criar datasets próprios do caso Ermesinde (`Building_Ermesinde.csv`, `weather_porto.csv`, etc.)
 - [ ] Adaptar `schema.json` ao caso de Ermesinde (estação de comboios + PV + armazenamento)
 - [ ] Documentar pipeline completo de simulação (geração de dados → schema → treino → avaliação)
-- [ ] Avaliar necessidade de LSTM dynamics para modelação térmica da estação
+- [ ] Avaliar necessidade de LSTM dynamics para modelação térmica da estação -->
