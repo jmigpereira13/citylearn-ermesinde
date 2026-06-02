@@ -52,3 +52,10 @@ pip install -r requirements.txt
 - separar testes exploratórios de scripts finais;
 - adicionar datasets e schemas próprios do caso Ermesinde;
 - documentar pipeline completo de simulação. -->
+
+## A minha perceção de organização dos datasets
+
+https://www.citylearn.net/overview/dataset.html 
+
+Os datasets são um conjunto de *ficheiros de dados* que constituem x Buildings, mediante o estudo pretendido para a simulação.
+Existem 
