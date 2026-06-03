@@ -50,7 +50,6 @@ E_{nsl}(h) = \left(\sum_i P_i \cdot f_i(h)\right) \cdot 10^{-3}
 $$
 
 onde:
-
 - $$P_i$$ = potência nominal do equipamento $$i$$, em W;
 - $$f_i(h)$$ = fator de utilização do equipamento na hora $$h$$;
 - o resultado final é convertido para **kWh por hora**.
@@ -87,18 +86,6 @@ Logo:
 - carga fixa em funcionamento normal = **2660 W**
 - carga fixa em standby = **266 W**
 
-### Fórmula Excel típica
-
-Se a soma das cargas fixas estiver numa célula, por exemplo `C20`, e o fator horário estiver em `D20`, então:
-
-```excel
-=C20*D20/1000
-```
-
-Resultado: energia horária da componente fixa em **kWh**.
-
-***
-
 ## 3. Cargas dinâmicas — escadas rolantes
 
 As escadas rolantes são tratadas como **non_shiftable_load dinâmico**, porque não são controláveis, mas o seu consumo depende do fluxo de passageiros.
@@ -124,87 +111,7 @@ Com base na observação da estação e nas potências já definidas na folha **
 
 ***
 
-## 4. Tabelas corretas para Tipo A e Tipo B
-
-Estas tabelas devem ficar coerentes com a folha de **potências nominais / cargas dinâmicas** do Excel.
-
-### Tipo A
-
-Corresponde às escadas rolantes entre **Entrada + Piso Inferior**.
-
-| Parâmetro | Valor | Unidade | Observação |
-|---|---:|---|---|
-| N.º escadas rolantes | 2.0 | un | valor real observado |
-| Pot p/und – eco (s/passageiros) | 420.0 | W | potência reduzida |
-| Pot p/und – carga plena | 2100.0 | W | potência com utilização intensa |
-| Pot. total Tipo A – eco | 840.0 | W | = 2 × 420 |
-| Pot. total Tipo A – plena | 4200.0 | W | = 2 × 2100 |
-| Vel. nominal | 0.5 | m/s | valor de referência |
-| Inclinação estimada | 30.0 | graus | observação de campo |
-| Pico manhã CP Ermesinde | 06h–09h dias úteis | – | maior procura |
-| Pico tarde CP Ermesinde | 16h–19h dias úteis | – | maior procura |
-| Fator pico manhã | 0.9 | – | uso muito elevado |
-| Fator pico tarde | 0.8 | – | uso elevado |
-| Fator fora pico | 0.4 | – | regime intermédio |
-| Fator eco (noite/madrugada) | 0.1 | – | quase sem passageiros |
-
-### Tipo B
-
-Corresponde às escadas rolantes de acesso às **Linhas 2–5**.
-
-| Parâmetro | Valor | Unidade | Observação |
-|---|---:|---|---|
-| N.º escadas rolantes | 8.0 | un | valor real observado |
-| Pot p/und – eco (s/passageiros) | 260.0 | W | potência reduzida |
-| Pot p/und – carga plena | 1310.0 | W | potência com utilização intensa |
-| Pot. total Tipo B – eco | 2080.0 | W | = 8 × 260 |
-| Pot. total Tipo B – plena | 10480.0 | W | = 8 × 1310 |
-| Vel. nominal | 0.5 | m/s | valor de referência |
-| Inclinação estimada | 30.0 | graus | observação de campo |
-| Pico manhã CP Ermesinde | 06h–09h dias úteis | – | maior procura |
-| Pico tarde CP Ermesinde | 16h–19h dias úteis | – | maior procura |
-| Fator pico manhã | 0.9 | – | uso muito elevado |
-| Fator pico tarde | 0.8 | – | uso elevado |
-| Fator fora pico | 0.4 | – | regime intermédio |
-| Fator eco (noite/madrugada) | 0.1 | – | quase sem passageiros |
-
-### Nota importante para o Excel
-
-As linhas antigas do tipo:
-
-- `Pot.total 10 unds – eco`
-- `Pot.total 10 unds – plena`
-
-não devem continuar iguais para os dois blocos. O ideal é:
-
-- **apagar essas linhas**, ou
-- renomear para **Pot. total Tipo A** e **Pot. total Tipo B**, com fórmulas ligadas ao número real de escadas de cada tipo.
-
-### Fórmulas Excel recomendadas
-
-Se, por exemplo:
-
-- número de escadas estiver em `C6`
-- potência eco/unitária em `C7`
-- potência plena/unitária em `C8`
-
-então:
-
-```excel
-=C6*C7
-```
-
-para a potência total eco, e:
-
-```excel
-=C6*C8
-```
-
-para a potência total plena.
-
-***
-
-## 5. Perfil horário de ocupação
+## 4. Perfil horário de ocupação
 
 Como não existem ainda medições horárias reais de passageiros, foi definido um **perfil de ocupação proxy** baseado nos horários típicos de comboios suburbanos e no comportamento observado na estação.
 
@@ -249,7 +156,7 @@ Resultado: consumo horário das escadas em kWh.
 
 ***
 
-## 6. Elevadores
+## 5. Elevadores
 
 Os elevadores também podem ser incluídos como carga dinâmica dentro do `non_shiftable_load`.
 
@@ -268,7 +175,7 @@ O uso horário pode ser simplificado com o mesmo fator de ocupação das escadas
 
 ***
 
-## 7. HVAC virtual para o schema.json
+## 6. HVAC virtual para o schema.json
 
 Apesar de a estação real não possuir climatização total do espaço, foi decidido modelar um **HVAC virtual** para efeitos de simulação no contexto do projeto europeu.
 
@@ -310,7 +217,6 @@ $$
 ```
 
 ### Interpretação dos parâmetros
-
 - `nominal_power` → potência térmica nominal do equipamento;
 - `efficiency` → COP/EER usado na conversão entre energia térmica e elétrica;
 - `target_cooling_temperature` → setpoint de arrefecimento;
@@ -318,29 +224,25 @@ $$
 - `loss_coefficient` → perdas adicionais assumidas no modelo.
 
 ### Nota prática
-
 Se o CityLearn usar diretamente `cooling_demand` em kWh térmicos, então o consumo elétrico do equipamento será obtido internamente com base na eficiência definida no equipamento.
 
 ***
 
-## 8. Perfil HVAC no Excel
+## 7. Perfil HVAC no Excel
 
 Se for necessário construir um perfil simplificado no Excel, pode usar-se uma lógica sazonal:
 
 ### Verão
-
 - HVAC ativo entre 09h e 21h
 - carga relativa entre 0.3 e 1.0
 - maior solicitação em dias úteis e nas horas centrais
 
 ### Inverno
-
 - HVAC ativo entre 07h e 20h
 - carga mais moderada
 - foco em conforto térmico em vez de arrefecimento intenso
 
-### Fórmula Excel simplificada
-
+<!-- ### Fórmula Excel simplificada
 Se a potência térmica máxima estiver em `B10`, o fator horário em `C10` e o COP em `D10`:
 
 ```excel
@@ -348,17 +250,15 @@ Se a potência térmica máxima estiver em `B10`, o fator horário em `C10` e o 
 ```
 
 Resultado: potência elétrica horária estimada do HVAC.
+-->
+*** 
 
-***
-
-## 9. Sistema fotovoltaico (PV)
-
+## 8. Sistema fotovoltaico (PV)
 O sistema PV foi refinado para evitar uma estimativa excessivamente otimista da área disponível.
 
 ### Dados solares para Ermesinde
 
 Foram considerados dados do **PVGIS** para a zona de Ermesinde / Porto, com:
-
 - latitude: **41.18°**
 - longitude: **-8.49°**
 - inclinação: **35°**
@@ -366,7 +266,6 @@ Foram considerados dados do **PVGIS** para a zona de Ermesinde / Porto, com:
 - perdas totais do sistema: **14%**
 
 Resultado principal:
-
 - produção anual específica = **1398.81 kWh/kWp/ano**
 
 ### Produção mensal específica
@@ -389,12 +288,11 @@ Resultado principal:
 
 ***
 
-## 10. Refinamento da área útil de cobertura
+## 9. Refinamento da área útil de cobertura
 
 A área inicialmente atribuída ao PV foi considerada demasiado aproximada, pelo que foi adotada uma abordagem mais conservadora.
 
 ### Hipótese de cálculo
-
 - área bruta estimada de cobertura principal = **600 m²**
 - desconto por obstáculos, acessos técnicos, sombras e margens de segurança = **40%**
 
@@ -405,7 +303,6 @@ A_{útil} = 600 \cdot (1 - 0.40) = 360\ m^2
 $$
 
 ### Painel de referência
-
 Foi considerado um painel de aproximadamente:
 
 - **400 Wp**
@@ -414,19 +311,16 @@ Foi considerado um painel de aproximadamente:
 Como é necessário deixar espaçamento e acessibilidade, foi usado um fator adicional de ocupação de **1.1**.
 
 ### Número de painéis
-
 $$
 N_{painéis} = \frac{360}{1.96 \cdot 1.1} \approx 167
 $$
 
 ### Potência instalada
-
 $$
 P_{instalada} = 167 \cdot 0.400 = 66.8\ kWp
 $$
 
 ### Produção anual estimada
-
 $$
 E_{PV,anual} = 66.8 \cdot 1398.81 \approx 93\,440\ kWh/ano
 $$
@@ -439,7 +333,7 @@ Assim, o cenário mais defensável neste momento é de aproximadamente:
 
 ***
 
-## 11. Parâmetros PV para o schema.json
+## 10. Parâmetros PV para o schema.json
 
 Exemplo de parametrização:
 
@@ -454,7 +348,6 @@ Exemplo de parametrização:
 ```
 
 ### Interpretação
-
 - `nominal_power` → potência instalada em Wp;
 - `installed_capacity` → potência instalada em kWp;
 - `efficiency` → eficiência nominal do módulo;
@@ -462,7 +355,7 @@ Exemplo de parametrização:
 
 ***
 
-## 12. Conversão para séries horárias do CityLearn
+## 11. Conversão para séries horárias do CityLearn
 
 No Excel, o objetivo final é obter uma série horária com pelo menos as seguintes componentes:
 
@@ -494,8 +387,7 @@ balanço_elétrico = non_shiftable_load + HVAC_elétrico - solar_generation
 
 ***
 
-## 13. Notas finais
-
+<!-- ## 12. Notas finais
 - As escadas rolantes são o principal foco de intervenção do modelo.
 - O HVAC é virtual e serve apenas para compatibilizar o caso de estudo com cenários europeus mais exigentes.
 - A área PV deve ainda ser validada com melhor levantamento geométrico da cobertura.
@@ -504,7 +396,7 @@ balanço_elétrico = non_shiftable_load + HVAC_elétrico - solar_generation
 
 ***
 
-## 14. Sugestão prática para organização do Excel
+## 13. Sugestão prática para organização do Excel
 
 ### Folha `Potencias_Nominais`
 
@@ -536,4 +428,4 @@ balanço_elétrico = non_shiftable_load + HVAC_elétrico - solar_generation
 
 ### Folha `Simulação`
 
-- série temporal horária final para exportação.
+- série temporal horária final para exportação. -->
