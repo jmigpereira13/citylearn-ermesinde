@@ -207,7 +207,7 @@ schema.json
 - [ ] Criar datasets próprios do caso Ermesinde (`Building_Ermesinde.csv`, `weather_porto.csv`, etc.)
 - [ ] Adaptar `schema.json` ao caso de Ermesinde (estação de comboios + PV + armazenamento)
 - [ ] Documentar pipeline completo de simulação (geração de dados → schema → treino → avaliação)
-- [ ] Avaliar necessidade de LSTM dynamics para modelação térmica da estação -->
+- [ ] Avaliar necessidade de LSTM dynamics para modelação térmica da estação 
 
 ## Caso de Estudo: Estação de Comboios de Ermesinde
 
@@ -226,7 +226,7 @@ schema.json
 6. **PV e BESS**: 190 kWp (área medida via Google Earth Pro ~949 m²);
    bateria BYD C130 (131 kWh, 88 kW AC, LFP).
 
-<!-- ### Resultado — Ficheiros para o Tiago
+ ### Resultado — Ficheiros para o Tiago
 
 | Ficheiro | Conteúdo |
 |---|---|

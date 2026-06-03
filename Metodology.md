@@ -143,7 +143,7 @@ Como não existem ainda medições horárias reais de passageiros, foi definido 
 | 19h–24h | 0.1 |
 
 Este fator é usado para multiplicar a potência dinâmica nominal das escadas rolantes e, se necessário, também dos elevadores.
-
+<!-- 
 ### Exemplo de fórmula Excel
 
 Se a potência plena total das escadas estiver em `F20` e o fator horário estiver em `G20`:
@@ -152,7 +152,7 @@ Se a potência plena total das escadas estiver em `F20` e o fator horário estiv
 =F20*G20/1000
 ```
 
-Resultado: consumo horário das escadas em kWh.
+Resultado: consumo horário das escadas em kWh. -->
 
 ***
 

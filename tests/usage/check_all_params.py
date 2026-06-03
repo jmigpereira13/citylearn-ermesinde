@@ -4,10 +4,10 @@ import json
 CACHE_ROOT = r"C:\proj_dev\CityLearn\datasets"  # ajuste para o caminho do cache local dos datasets
 
 DATASETS = [
-    "citylearn_challenge_2023_phase_2_local_evaluation",
-    "citylearn_challenge_2022_phase_1",
+    #"citylearn_challenge_2023_phase_2_local_evaluation",
+    #"citylearn_challenge_2022_phase_1",
     "baeda_3dem",
-    "tx_travis_county_neighborhood",
+    #"tx_travis_county_neighborhood",
     # acrescentar mais nomes se tiver na cache
 ]
 
