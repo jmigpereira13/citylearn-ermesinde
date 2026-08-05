@@ -1,0 +1,118 @@
+{
+  "random_seed": 0,
+  "root_directory": null,
+  "central_agent": false,
+  "simulation_start_time_step": 0,
+  "simulation_end_time_step": 8759,
+  "episode_time_steps": null,
+  "rolling_episode_split": false,
+  "random_episode_split": false,
+  "seconds_per_time_step": 3600.0,
+
+  "observations": {
+    "month": { "active": true, "shared_in_central_agent": true },
+    "day_type": { "active": true, "shared_in_central_agent": true },
+    "hour": { "active": true, "shared_in_central_agent": true },
+
+    "outdoor_dry_bulb_temperature": { "active": true, "shared_in_central_agent": true },
+    "diffuse_solar_irradiance": { "active": true, "shared_in_central_agent": true },
+    "direct_solar_irradiance": { "active": true, "shared_in_central_agent": true },
+
+    "non_shiftable_load": { "active": true, "shared_in_central_agent": false },
+    "solar_generation": { "active": true, "shared_in_central_agent": false },
+    "cooling_demand": { "active": true, "shared_in_central_agent": false },
+
+    "electricity_pricing": { "active": true, "shared_in_central_agent": true },
+
+    "indoor_dry_bulb_temperature": { "active": false, "shared_in_central_agent": false },
+    "occupant_count": { "active": false, "shared_in_central_agent": false },
+    "carbon_intensity": { "active": false, "shared_in_central_agent": true },
+
+    "cooling_storage_soc": { "active": false, "shared_in_central_agent": false },
+    "dhw_storage_soc": { "active": false, "shared_in_central_agent": false },
+    "electrical_storage_soc": { "active": false, "shared_in_central_agent": false },
+
+    "cooling_device_efficiency": { "active": false, "shared_in_central_agent": false },
+    "heating_demand": { "active": false, "shared_in_central_agent": false },
+    "heating_device_efficiency": { "active": false, "shared_in_central_agent": false }
+  },
+
+  "actions": {
+    "cooling_storage": { "active": false },
+    "heating_storage": { "active": false },
+    "dhw_storage": { "active": false },
+    "electrical_storage": { "active": true },
+    "cooling_device": { "active": false },
+    "heating_device": { "active": false },
+    "cooling_or_heating_device": { "active": false }
+  },
+
+  "agent": {
+    "type": "citylearn.agents.sac.SAC",
+    "attributes": {
+      "hidden_dimension": [256, 256],
+      "discount": 0.9,
+      "tau": 0.005,
+      "lr": 0.001,
+      "batch_size": 512,
+      "replay_buffer_capacity": 100000.0,
+      "standardize_start_time_step": 8760,
+      "end_exploration_time_step": 8761,
+      "action_scaling_coef": 0.5,
+      "reward_scaling": 5.0,
+      "update_per_time_step": 2,
+      "alpha": 1.0
+    }
+  },
+
+  "reward_function": {
+    "type": "citylearn.reward_function.RewardFunction",
+    "attributes": null
+  },
+
+  "buildings": {
+    "Building_1": {
+      "include": true,
+      "energy_simulation": "Building_1.csv",
+      "weather": "weather.csv",
+      "carbon_intensity": null,
+      "pricing": "pricing.csv",
+
+      "type": "citylearn.building.Building",
+
+      "pv": {
+        "type": "citylearn.energy_model.PV",
+        "autosize": false,
+        "attributes": {
+          "nominal_power": 107.0
+        }
+      },
+
+      "electrical_storage": {
+        "type": "citylearn.energy_model.Battery",
+        "autosize": false,
+        "attributes": {
+          "capacity": 131.0,
+          "nominal_power": 88.0
+        }
+      },
+      "cooling_device": {
+        "type": "citylearn.energy_model.HeatPump",
+        "autosize": false,
+        "attributes": {
+          "nominal_power": 13.0,
+          "efficiency": 0.9,
+          "target_cooling_temperature": 8,
+          "target_heating_temperature": 45
+        }
+      },
+      "inactive_observations": [],
+      "inactive_actions": [
+        "cooling_storage",
+        "heating_storage",
+        "dhw_storage",
+        "heating_device"
+      ]
+    }
+  }
+}
